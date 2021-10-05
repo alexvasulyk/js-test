@@ -1,8 +1,12 @@
 /* 1. How Much is True  */
 
+
+// Тут не логічно використовувати фільтер в такому контексті як ти зробив
+// Є інший варіант зробити це через фільтер не використуючи змінну counter. Уважно почитай, що робить фільтер 
 function countTrue(elem) {
     let counter = 0;
     elem.filter(item => {
+        // Тут можна просто if(item) - воно зайде в if якщо це true і не зайде, якщо false
         if (item == true) {
             return counter += 1;
         }
@@ -17,6 +21,8 @@ function countTrue(elem) {
 
 /* 2. Instant JAZZ */
 
+// Тут впринципі нормально, але можна оптимізнути через метод масиву map, почитай за нього і перероби
+// Ще один варіант, що перевірити останній елемент: elem[i].slice(-1) === '7' - так буде більш зрозуміліше, що саме тобі треба
 function jazzify(elem) {
     let element = []
     for (let i in elem) {
@@ -37,17 +43,24 @@ function jazzify(elem) {
 
 /* 3. Sort Numbers in Descending Order     *-*-*-*-*-**/
 
+// Все це можна замінити одним рядочком. Почитай за метод split
+// let arr = []
+// for(let i = 0; i < elementStart.length; i++){
+// arr[i]=elementStart[i];
+// }
+
 function sortDescending(elem){
 
 let elementStart = elem.toString();
 let arr = []
-for(let i = 0; i < elementStart.length; i++){
-arr[i]=elementStart[i];
+    for(let i = 0; i < elementStart.length; i++){
+    arr[i]=elementStart[i];
 }
-arr.sort(function(a, b){
+
+elementStart.sort(function(a, b){
     return b - a;
   })
-let finish = arr.join("")
+let finish = elementStart.join("")
 console.log(finish)
 }
 
