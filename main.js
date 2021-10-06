@@ -1,13 +1,14 @@
 /* 1. How Much is True  */
 
 function countTrue(elem) {
-    let counter = 0;
-    elem.filter(item => {
-        if (item == true) {
-            return counter += 1;
-        }
-    })
-    console.log(counter)
+
+    const counter = elem.filter(item=> {
+     if(item){
+         return 1;
+     }
+    });
+    
+    console.log(counter.length)
 }
 
 // countTrue([true, false, false, true, false]) 
@@ -18,14 +19,15 @@ function countTrue(elem) {
 /* 2. Instant JAZZ */
 
 function jazzify(elem) {
-    let element = []
-    for (let i in elem) {
-        if (elem[i].indexOf(7) !== -1) {
-            element.push(elem[i])
-        } else {
-            element.push(elem[i] + 7)
+    const element = elem.map(item=>{
+        if(item.indexOf(7) == -1){
+            return item +7
+        }else{
+            return item
         }
-    }
+    });
+  
+    
     console.log(element)
 }
 
@@ -38,16 +40,12 @@ function jazzify(elem) {
 /* 3. Sort Numbers in Descending Order     *-*-*-*-*-**/
 
 function sortDescending(elem){
-
-let elementStart = elem.toString();
-let arr = []
-for(let i = 0; i < elementStart.length; i++){
-arr[i]=elementStart[i];
-}
-arr.sort(function(a, b){
+const elementStart = elem.toString();
+const arr = elementStart.split('')
+const arrSort = arr.sort(function(a, b){
     return b - a;
   })
-let finish = arr.join("")
+const finish = arrSort.join("")
 console.log(finish)
 }
 
@@ -58,11 +56,11 @@ console.log(finish)
 
 /* 4. Sort an Array by String Length */
 function sortByLength(elem){
-let sortFinish = elem;
-sortFinish.sort(function(a, b){
+
+const sortArr = elem.sort(function(a, b){
     return a.length - b.length;
   })
-console.log(sortFinish);
+console.log(sortArr);
 }
 
 // sortByLength(["Google", "Apple", "Microsoft"]);
@@ -72,17 +70,12 @@ console.log(sortFinish);
 
 /* 5. Find the Smallest and Biggest Numbers */
 function minMax (elem){
-    let maxNumber = elem[0];
-    let minNumber = elem[0];
-    for(let i = 0; i < elem.length;i++){
-       if(elem[i] > maxNumber){
-           maxNumber = elem[i];
-       }else if (elem[i]<minNumber){
-           minNumber = elem[i]
-       }
-    }
-    console.log(minNumber);
-    console.log(maxNumber);
+    const sortArr = elem.sort(function(a, b){
+        return a - b});
+    let min = [sortArr[0]];
+    let max = [sortArr[sortArr.length-1]];
+    const finish = min.concat(max);
+    console.log(finish);
 }
 
 // minMax([1, 2, 3, 4, 5]);
@@ -93,15 +86,12 @@ function minMax (elem){
 
 /* 6. Find the Largest Numbers in a Group of Arrays */
 function findLargestNums(elem){
-    let maxNumber=[-100,-100,-100];
-    for(let i = 0; i<elem.length;i++){
-        for(let k = 0;k<elem[i].length;k++){
-            if(elem[i][k]> maxNumber[i]){
-                maxNumber[i]=elem[i][k]; 
-            }
-        }
-    }
-    console.log(maxNumber);
+    const sortMap = elem.map(function(item){
+        const sortArr =item.sort(function(a,b){return a - b});
+        let finish = sortArr.pop();
+        return finish;
+        });
+    console.log(sortMap);
 }
 // findLargestNums([[4, 2, 7, 1], [20, 70, 40, 90], [1, 2, 0]])
 // findLargestNums([[-34, -54, -74], [-32, -2, -65], [-54, 7, -43]])
@@ -138,14 +128,16 @@ class Calculator {
 
 /* 8. Return the Objects Keys and Values */
 function keysAndValues(item){
-    let returnKeys = [];
-    let returnItem = [];
+    let arrOne= [];
+    let arrTwo =[]
 for(key in item){
-    returnItem.push(key);
-    returnKeys.push(item[key]);
+    arrOne.push(key);
+    arrTwo.push(item[key]);
 }
-console.log(returnItem);
-console.log(returnKeys);
+let finish = [arrOne,arrTwo]
+
+console.log(finish);
+
 }
 
 // keysAndValues({ a: 1, b: 2, c: 3 }) 
@@ -154,19 +146,16 @@ console.log(returnKeys);
 
 /* 9. Let's Sort This Array! */
 function ascDesNone(item , method){
-    let arrNumber = item;
         switch(method) {
         case 'Asc':
-        arrNumber.sort((a, b)=> a-b);
+        console.log(item.sort((a, b)=> a-b))
         break;
         case 'Des':
-        arrNumber.sort((a, b)=> b-a);
+        console.log(item.sort((a, b)=> b-a))
         break;
-        case 'None':
-        arrNumber = item
-        break;
+        default:
+        console.log(item)
         }
-console.log(arrNumber)
 }
 
 // ascDesNone([4, 3, 2, 1], "Asc" );
@@ -177,9 +166,8 @@ console.log(arrNumber)
 
 /* 10. Sort the Unsortable */
 function sortIt(elem){
-    let x = elem
-x.sort((a, b)=> a[0]-b[0] || a-b)
-console.log(x)
+    const sortArr = elem.sort((a, b)=> a[0]-b[0] || a-b)
+console.log(sortArr)
 }
 
 // sortIt([4, 1, 3]);
@@ -191,30 +179,27 @@ console.log(x)
 
 /* 11. No Hidden Fees */
 function hasHiddenFee(elem,item){
-    let x = 0
-    let numberTwo = item.substring(1)
-    for(key in elem){
-        let y = +elem[key].substring(1)
-        x+=y
-    }
-    if(x == numberTwo){
-        return console.log(false)
-    }else{
-        return console.log(true)
-    }
+    const numberTwo = item.substring(1);
+    const mass = elem.map(function(item){
+        return item.substring(1)
+    });
+    const x = mass.reduce(function(prev,item){
+        return +prev+(+item)
+    })
+    console.log(x!=numberTwo)
+
 }
 
-// hasHiddenFee(["$2", "$4", "$1", "$8"], "$15")
-// hasHiddenFee(["$1", "$2", "$3"], "$6")
-// hasHiddenFee(["$1"], "$4")
+// hasHiddenFee(["$2", "$4", "$1", "$8"], "$15");
+// hasHiddenFee(["$1", "$2", "$3"], "$6");
+// hasHiddenFee(["$1"], "$4");
 
 /* 12. Trace That Matrix */
 function trace(elem){
-    let i = 0;
+
     let sum = 0;
     for(key in elem){
-        sum+=elem[i][key];
-        i++;
+        sum+=elem[key][key];
     }
     console.log(sum)
 
@@ -266,11 +251,9 @@ function pentagonal(n){
 
 /* 16. Temperature Conversion */
 function tempConversion(n){
-    let tempF = n * 9 / 5 + 32;
-    let tempK = n + 273.15;
-    let summ = [];
-    summ.push(tempF)
-    summ.push(tempK)
+    let tempF = [n * 9 / 5 + 32];
+    let tempK = [n + 273.15];
+    let summ = tempF.concat(tempK);
     console.log(summ)
 }
 // tempConversion(0);
@@ -282,17 +265,16 @@ function tempConversion(n){
 function missingLetter(str) {
     let alphabet = "abcdefghijklmnopqrstuvwxyz";
     let start = alphabet.indexOf(str[0]);
-    let focusA = alphabet.slice(start);
+    let finish = 'No Missing Letter';
 for(let i =0; i<str.length;i++){
-    if(str[i]!= focusA[i]){
-     return console.log(focusA[i]);
-    }
+    if(str[i]!=alphabet[start]){
+        finish = alphabet[start]
 }
-for(let i =0; i<str.length;i++){
-    if(str[i]== focusA[i]){
-     return console.log('No Missing Letter');
-    }
+else{
+    start++
 }
+}
+console.log(finish)
 }
 
 // missingLetter("abdefg")
