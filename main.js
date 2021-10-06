@@ -70,12 +70,14 @@ console.log(finish)
 
 
 /* 4. Sort an Array by String Length */
+
+// Тут добре, але немає сенсу в переприсвоюванні масиву у нову змінну
 function sortByLength(elem){
-let sortFinish = elem;
-sortFinish.sort(function(a, b){
+// let sortFinish = elem;
+elem.sort(function(a, b){
     return a.length - b.length;
   })
-console.log(sortFinish);
+console.log(elem);
 }
 
 // sortByLength(["Google", "Apple", "Microsoft"]);
@@ -84,6 +86,8 @@ console.log(sortFinish);
 
 
 /* 5. Find the Smallest and Biggest Numbers */
+
+// Тут також може бути, але можна було зробити простіше через сортування, подумай як і перероби
 function minMax (elem){
     let maxNumber = elem[0];
     let minNumber = elem[0];
@@ -105,6 +109,11 @@ function minMax (elem){
 
 
 /* 6. Find the Largest Numbers in a Group of Arrays */
+
+
+// Тут не добре 
+// let maxNumber=[-100,-100,-100]; - це зле. Якщо в тебе якісь з масивчиків будуть порожні, то виходить, що в тебе максимальні числа будуть -100, що є не логічно
+// В загальному думки правильні, але пошук елемену можна набагато спростити (Ти зможеш це зрозуміти, коли переробиш завдання вище)
 function findLargestNums(elem){
     let maxNumber=[-100,-100,-100];
     for(let i = 0; i<elem.length;i++){
@@ -116,6 +125,7 @@ function findLargestNums(elem){
     }
     console.log(maxNumber);
 }
+
 // findLargestNums([[4, 2, 7, 1], [20, 70, 40, 90], [1, 2, 0]])
 // findLargestNums([[-34, -54, -74], [-32, -2, -65], [-54, 7, -43]])
 // findLargestNums([[0.4321, 0.7634, 0.652], [1.324, 9.32, 2.5423, 6.4314], [9, 3, 6, 3]])
@@ -150,22 +160,29 @@ class Calculator {
 
 
 /* 8. Return the Objects Keys and Values */
+
+// Тут завдання зроблено не до кінця, результатом функції повинен бути масив, в якому два масив, один з ключами, другий із значеннями
+// Почитай про методи об'єктів, тут це все можна зробити в 1 лінію (максимум 2), без циклів 
 function keysAndValues(item){
     let returnKeys = [];
     let returnItem = [];
-for(key in item){
-    returnItem.push(key);
-    returnKeys.push(item[key]);
-}
-console.log(returnItem);
-console.log(returnKeys);
+
+    for(key in item){
+        returnItem.push(key);
+        returnKeys.push(item[key]);
+    }
+    console.log(returnItem);
+    console.log(returnKeys);
 }
 
-// keysAndValues({ a: 1, b: 2, c: 3 }) 
+// keysAndValues({ a: 1, b: 2, c: 3 })
 // keysAndValues({ a: "Apple", b: "Microsoft", c: "Google" })
 // keysAndValues({ key1: true, key2: false, key3: undefined })
 
 /* 9. Let's Sort This Array! */
+
+// Тут впринципі норм, але я не розумію нашо ти переприсвоюєш масив
+// І ще така порада, завжди залишай в switch щось, що буде повертатися по дефолту (default:), бо можна помилитися в 1 букві і в тебе все ляже
 function ascDesNone(item , method){
     let arrNumber = item;
         switch(method) {
@@ -189,6 +206,7 @@ console.log(arrNumber)
 
 
 /* 10. Sort the Unsortable */
+// Тут добре, але знов переприсвоєння. І ще, якщо ти переприсвоюєш, то роби цю змінну константою, вона ж в тебе не міняється
 function sortIt(elem){
     let x = elem
 x.sort((a, b)=> a[0]-b[0] || a-b)
@@ -203,9 +221,15 @@ console.log(x)
 
 
 /* 11. No Hidden Fees */
+
+// Тут можна зробити простіше
+// 1. Сума елементів масиву можна спростити через reduce
+// 2. Якщо ти зробиш console.log(x==numberTwo) - воно тобі поверне true або false, тоді ти скорочуєш код від 4 рядків (з іфки) до 1
+// 3. В завданні написано, що функція має повертати true або false, а вона в тебе повертає console.log
 function hasHiddenFee(elem,item){
     let x = 0
     let numberTwo = item.substring(1)
+    
     for(key in elem){
         let y = +elem[key].substring(1)
         x+=y
@@ -217,11 +241,13 @@ function hasHiddenFee(elem,item){
     }
 }
 
-// hasHiddenFee(["$2", "$4", "$1", "$8"], "$15")
+// hasHiddenFee(["$25", "$4", "$1", "$8"], "$15")
 // hasHiddenFee(["$1", "$2", "$3"], "$6")
 // hasHiddenFee(["$1"], "$4")
 
 /* 12. Trace That Matrix */
+
+// Тут можна обійтися без змінної i, подумай як і перероби
 function trace(elem){
     let i = 0;
     let sum = 0;
@@ -250,6 +276,8 @@ function trace(elem){
   
   
 /* 13. Remove the Special Characters from a String (use RegExp) */
+
+// Тут добре
 function removeSpecialCharacters(elem){
     console.log(elem.replace(/[.!@#$%^&\*()]/g,''));
 }
@@ -259,6 +287,8 @@ function removeSpecialCharacters(elem){
 // removeSpecialCharacters("D0n$c sed 0di0 du1")
 
 /* 14. Check if a String is a Mathematical Expression (use RegExp) */
+
+// Тут добре
 function mathExpr(elem){
     let regex = new RegExp('[0-9]+$');
     console.log(regex.test(elem))
@@ -268,6 +298,8 @@ function mathExpr(elem){
 // mathExpr("4*no") 
 
 /* 15. Pentagonal Number */
+
+// Тут добре
 function pentagonal(n){
     console.log((5*(n*n)-5*n+2)/2);
   
@@ -278,6 +310,8 @@ function pentagonal(n){
 // pentagonal(8)
 
 /* 16. Temperature Conversion */
+
+// Добре, але можна спростити, забравши push
 function tempConversion(n){
     let tempF = n * 9 / 5 + 32;
     let tempK = n + 273.15;
@@ -292,20 +326,31 @@ function tempConversion(n){
 // tempConversion(300.4);
 
 /* 17. What's the Missing Letter? */
+
+// Це завдання виконано не добре
+// 1. Два цикли потрібно замінити одним
+// 2. let focusA = alphabet.slice(start); - це нормально, але можна зробити трохи краще. 
+// Ти можеш брати прям ту саму стрінгу з алфавіту, яка в тебе, тоді ти зекономиш час на перебір більшої частини алфавіту, яка тобі не потрібна
+// 3. З циклу нижче немає ніякого сенсу, ти після першої ж ітерації його закінчуєш
+// for(let i =0; i<str.length;i++){
+//     if(str[i]== focusA[i]){
+//      return console.log('No Missing Letter');
+//     }
+// }
 function missingLetter(str) {
     let alphabet = "abcdefghijklmnopqrstuvwxyz";
     let start = alphabet.indexOf(str[0]);
     let focusA = alphabet.slice(start);
-for(let i =0; i<str.length;i++){
-    if(str[i]!= focusA[i]){
-     return console.log(focusA[i]);
+    for(let i =0; i<str.length;i++){
+        if(str[i]!= focusA[i]){
+        return console.log(focusA[i]);
+        }
     }
-}
-for(let i =0; i<str.length;i++){
-    if(str[i]== focusA[i]){
-     return console.log('No Missing Letter');
+    for(let i =0; i<str.length;i++){
+        if(str[i]== focusA[i]){
+        return console.log('No Missing Letter');
+        }
     }
-}
 }
 
 // missingLetter("abdefg")
