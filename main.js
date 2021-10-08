@@ -72,6 +72,8 @@ console.log(sortArr);
 function minMax (elem){
     const sortArr = elem.sort(function(a, b){
         return a - b});
+    // Тут можна заміть 3 рядків і змінних зробити 1
+    // const finish = [sortArr[0], sortArr[sortArr.length-1]]
     let min = [sortArr[0]];
     let max = [sortArr[sortArr.length-1]];
     const finish = min.concat(max);
@@ -88,6 +90,7 @@ function minMax (elem){
 function findLargestNums(elem){
     const sortMap = elem.map(function(item){
         const sortArr =item.sort(function(a,b){return a - b});
+        
         let finish = sortArr.pop();
         return finish;
         });
@@ -130,6 +133,11 @@ class Calculator {
 function keysAndValues(item){
     let arrOne= [];
     let arrTwo =[]
+
+    // Тут можна було обійтися без циклу
+    // Object.values(item) - поверне тобі всі значення масивом
+    //  Object.keys(item) - поверне тобі всі ключі масивом
+    // const finish = [Object.values(item), Object.keys(item)] - найпростіше вирішення задачі
 for(key in item){
     arrOne.push(key);
     arrTwo.push(item[key]);
@@ -178,6 +186,7 @@ console.log(sortArr)
 
 
 /* 11. No Hidden Fees */
+
 function hasHiddenFee(elem,item){
     const numberTwo = item.substring(1);
     const mass = elem.map(function(item){
@@ -262,19 +271,42 @@ function tempConversion(n){
 // tempConversion(300.4);
 
 /* 17. What's the Missing Letter? */
+
+// Ну більш-менш, але шось всеодно заплутане якесь для мене
+// Це мій варіант виконання цього завдання
+
+// function missingLetter(str) {
+//     let alphabet = "abcdefghijklmnopqrstuvwxyz";
+//     Знаходимо індекс першої букви з стрінги
+//     const indexStart  = alphabet.indexOf(str[0]);
+//     Знаходимо індекс останньої букви з стрінги
+//     const indexEnd = alphabet.indexOf(str[str.length -1]);
+//     Беремо з цілого алфавіту тільки ту частинку, яка нам потрібна
+//     const substring = alphabet.substring(indexStart, indexEnd);
+//     let a;
+//     for(let i = 0; i< substring.length & i< str.length; i++){
+//     Тут відповідно, коли ми знаходимо букву, яка пропущена, мо вже закінчуємо цикл, бо в завданні написано, що вона тільки 1, тому дальше крутити цикл немає сенсу
+//         if(substring[i] !== str[i]){
+//             a = substring[i];
+//             return;
+//         }
+//     }
+//     Ну і тут, якщо a рівне null, тобто пропущеної букви нема, то ми виводимо "No matches", але, якщо a не null, то виводимо його
+//     console.log(a ?? 'No matches')
+// }
+
 function missingLetter(str) {
     let alphabet = "abcdefghijklmnopqrstuvwxyz";
     let start = alphabet.indexOf(str[0]);
     let finish = 'No Missing Letter';
-for(let i =0; i<str.length;i++){
-    if(str[i]!=alphabet[start]){
-        finish = alphabet[start]
-}
-else{
-    start++
-}
-}
-console.log(finish)
+    for(let i =0; i<str.length;i++){
+        if(str[i]!=alphabet[start]){
+            finish = alphabet[start]
+        } else{
+            start++
+        }
+    }
+    console.log(finish)
 }
 
 // missingLetter("abdefg")
